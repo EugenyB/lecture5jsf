@@ -20,6 +20,7 @@
             <h:commandButton action="#{studentService.addStudent()}" value="Add"/>
         </h:form>
         <h2>Students</h2>
+        <h:form>
         <h:dataTable value="#{studentService.students}" var="s">
             <h:column>
                 <f:facet name="header">№</f:facet>
@@ -33,7 +34,12 @@
                 <f:facet name="header">Age</f:facet>
                 <h:outputText value="#{s.age}"/>
             </h:column>
+            <h:column>
+                <f:facet name="header">X</f:facet>
+                <h:commandButton value="Delete" action="#{studentService.delete(s.id)}"/>
+            </h:column>
         </h:dataTable>
+        </h:form>
     </h:body>
 </f:view>
 </html>

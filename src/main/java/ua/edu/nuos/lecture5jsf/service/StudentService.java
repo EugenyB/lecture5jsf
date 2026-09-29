@@ -30,4 +30,8 @@ public class StudentService {
         studentRepository.save(student);
         student = new Student();
     }
+
+    public void delete(Long id) {
+        studentRepository.deleteById(id);
+    }
 }
