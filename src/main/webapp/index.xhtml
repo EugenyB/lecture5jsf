@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html">
+<f:view>
+    <h:head>
+        <title>Start page</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <h:body>
+        <h1>Hello World!</h1>
+        <h:form>
+            <h:panelGrid columns="2">
+            <h:outputLabel value="Name:" for="name"/>
+            <h:inputText id="name" value="#{studentService.student.name}"/>
+            <h:outputLabel value="Age:" for="age"/>
+            <h:inputText id="age" value="#{studentService.student.age}"/>
+            </h:panelGrid>
+            <h:commandButton action="#{studentService.addStudent()}" value="Add"/>
+        </h:form>
+        <h2>Students</h2>
+        <h:dataTable value="#{studentService.students}" var="s">
+            <h:column>
+                <f:facet name="header">№</f:facet>
+                <h:outputText value="#{s.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{s.name}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Age</f:facet>
+                <h:outputText value="#{s.age}"/>
+            </h:column>
+        </h:dataTable>
+    </h:body>
+</f:view>
+</html>
