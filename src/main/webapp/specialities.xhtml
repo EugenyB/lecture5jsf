@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+>
+<f:view>
+    <h:head>
+        <title>Specialities</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <h:body>
+        <h1>Specialities</h1>
+
+        <!-- Add Speciality Form -->
+        <h:form>
+            <h:panelGrid columns="2" styleClass="inputform">
+                <h:outputLabel value="Title:" for="title"/>
+                <h:inputText id="title" value="#{specialityService.specialty.title}" required="true"/>
+                <h:outputLabel value="Code (shifr):" for="shifr"/>
+                <h:inputText id="shifr" value="#{specialityService.specialty.shifr}"/>
+            </h:panelGrid>
+            <p:commandButton styleClass="ui-button-raised"
+                             action="#{specialityService.addSpeciality()}"
+                             value="Add Speciality"
+                             update="@form, specialitiesTable, studentsPanel"/>
+        </h:form>
+
+        <!-- Specialities Table -->
+        <h2>Speciality List</h2>
+        <h:form id="specialitiesTable">
+            <h:dataTable value="#{specialityService.specialities}" var="sp">
+                <h:column>
+                    <f:facet name="header">№</f:facet>
+                    <h:outputText value="#{sp.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Title</f:facet>
+                    <h:outputText value="#{sp.title}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Code</f:facet>
+                    <h:outputText value="#{sp.shifr}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Students</f:facet>
+                    <p:commandButton value="Show Students"
+                                     styleClass="ui-button-info"
+                                     action="#{specialityService.setSelectedSpecialityId(sp.id)}"
+                                     update="specialitiesTable, studentsPanel"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Delete</f:facet>
+                    <p:commandButton icon="pi pi-trash"
+                                     styleClass="rounded-button ui-button-danger"
+                                     action="#{specialityService.delete(sp.id)}"
+                                     update="specialitiesTable, studentsPanel"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+
+        <!-- Students of Selected Speciality -->
+        <h:panelGroup id="studentsPanel">
+            <h:panelGroup rendered="#{specialityService.selectedSpecialityId != null}">
+                <h2>Students of selected speciality</h2>
+                <h:form>
+                    <h:dataTable value="#{specialityService.studentsOfSelected}" var="s">
+                        <h:column>
+                            <f:facet name="header">№</f:facet>
+                            <h:outputText value="#{s.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                            <h:outputText value="#{s.name}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Age</f:facet>
+                            <h:outputText value="#{s.age}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </h:panelGroup>
+        </h:panelGroup>
+
+    </h:body>
+</f:view>
+</html>

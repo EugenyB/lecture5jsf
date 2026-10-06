@@ -29,6 +29,14 @@
             <artifactId>lombok</artifactId>
             <version>1.18.48</version>
         </dependency>
+        <!-- Source: https://mvnrepository.com/artifact/org.primefaces/primefaces -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>15.0.18</version>
+            <scope>compile</scope>
+            <classifier>jakarta</classifier>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>

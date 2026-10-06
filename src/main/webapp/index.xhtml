@@ -2,7 +2,9 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="jakarta.faces.core"
-      xmlns:h="jakarta.faces.html">
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+>
 <f:view>
     <h:head>
         <title>Start page</title>
@@ -11,16 +13,16 @@
     <h:body>
         <h1>Hello World!</h1>
         <h:form>
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="2" styleClass="inputform">
             <h:outputLabel value="Name:" for="name"/>
             <h:inputText id="name" value="#{studentService.student.name}"/>
             <h:outputLabel value="Age:" for="age"/>
-            <h:inputText id="age" value="#{studentService.student.age}"/>
+            <p:spinner id="age" value="#{studentService.student.age}"/>
             </h:panelGrid>
-            <h:commandButton action="#{studentService.addStudent()}" value="Add"/>
+            <p:commandButton styleClass="ui-button-raised" action="#{studentService.addStudent()}" value="Add" update="@form, table"/>
         </h:form>
         <h2>Students</h2>
-        <h:form>
+        <h:form id="table">
         <h:dataTable value="#{studentService.students}" var="s">
             <h:column>
                 <f:facet name="header">№</f:facet>
@@ -36,7 +38,7 @@
             </h:column>
             <h:column>
                 <f:facet name="header">X</f:facet>
-                <h:commandButton value="Delete" action="#{studentService.delete(s.id)}"/>
+                <p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-danger" action="#{studentService.delete(s.id)}" update="@form"/>
             </h:column>
         </h:dataTable>
         </h:form>

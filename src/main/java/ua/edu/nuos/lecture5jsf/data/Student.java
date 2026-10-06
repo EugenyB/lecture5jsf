@@ -20,8 +20,14 @@ public class Student {
 
     private Integer age;
 
+    @ManyToOne
+    @JoinColumn(name = "specialty_id")
+    private Specialty specialty;
+
     public Student(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
+
+
 }
