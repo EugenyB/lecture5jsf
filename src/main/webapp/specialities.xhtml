@@ -30,6 +30,10 @@
         <!-- Specialities Table -->
         <h2>Speciality List</h2>
         <h:form id="specialitiesTable">
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes ui-button-danger"/>
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>
+            </p:confirmDialog>
             <h:dataTable value="#{specialityService.specialities}" var="sp">
                 <h:column>
                     <f:facet name="header">№</f:facet>
@@ -55,7 +59,10 @@
                     <p:commandButton icon="pi pi-trash"
                                      styleClass="rounded-button ui-button-danger"
                                      action="#{specialityService.delete(sp.id)}"
-                                     update="specialitiesTable, studentsPanel"/>
+                                     update="specialitiesTable, studentsPanel">
+                        <p:confirm header="Delete Speciality" icon="pi pi-exclamation-triangle"
+                                   message="Are you sure you want to delete speciality?"/>
+                    </p:commandButton>
                 </h:column>
             </h:dataTable>
         </h:form>

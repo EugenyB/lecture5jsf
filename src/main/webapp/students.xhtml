@@ -12,6 +12,7 @@
     </h:head>
     <h:body>
         <h1>Students</h1>
+        <p:growl id="growl" life="3000" showDetail="true" showSummary="true"/>
         <h:form>
             <h:panelGrid columns="2" styleClass="inputform">
                 <h:outputLabel value="Name:" for="name"/>
@@ -27,9 +28,10 @@
                                    itemValue="#{sp.id}"/>
                 </p:selectOneMenu>
             </h:panelGrid>
-            <p:commandButton styleClass="ui-button-raised" action="#{studentService.addStudent()}" value="Add" update="@form, table"/>
+            <p:commandButton styleClass="ui-button-raised" action="#{studentService.addStudent()}" value="Add" update="@form, table, growl"/>
         </h:form>
         <h2>Students</h2>
+
         <h:form id="table">
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                 <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes ui-button-danger"/>
