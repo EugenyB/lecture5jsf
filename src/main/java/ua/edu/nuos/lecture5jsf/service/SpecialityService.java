@@ -1,6 +1,7 @@
 package ua.edu.nuos.lecture5jsf.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Named
-@ApplicationScoped
+@RequestScoped
 public class SpecialityService {
 
     @Inject

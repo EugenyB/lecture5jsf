@@ -7,41 +7,13 @@
 >
 <f:view>
     <h:head>
-        <title>Start page</title>
+        <title>Home</title>
         <h:outputStylesheet library="css" name="styles.css"/>
     </h:head>
     <h:body>
-        <h1>Hello World!</h1>
-        <h:form>
-            <h:panelGrid columns="2" styleClass="inputform">
-            <h:outputLabel value="Name:" for="name"/>
-            <h:inputText id="name" value="#{studentService.student.name}"/>
-            <h:outputLabel value="Age:" for="age"/>
-            <p:spinner id="age" value="#{studentService.student.age}"/>
-            </h:panelGrid>
-            <p:commandButton styleClass="ui-button-raised" action="#{studentService.addStudent()}" value="Add" update="@form, table"/>
-        </h:form>
-        <h2>Students</h2>
-        <h:form id="table">
-        <h:dataTable value="#{studentService.students}" var="s">
-            <h:column>
-                <f:facet name="header">№</f:facet>
-                <h:outputText value="#{s.id}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Name</f:facet>
-                <h:outputText value="#{s.name}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Age</f:facet>
-                <h:outputText value="#{s.age}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">X</f:facet>
-                <p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-danger" action="#{studentService.delete(s.id)}" update="@form"/>
-            </h:column>
-        </h:dataTable>
-        </h:form>
+        <h1>Home</h1>
+        <p:button value="Students" outcome="students" icon="pi pi-users"/>
+        <p:button value="Specialities" outcome="specialities" icon="pi pi-list" styleClass="ui-button-secondary"/>
     </h:body>
 </f:view>
 </html>

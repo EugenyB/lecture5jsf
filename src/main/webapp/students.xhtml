@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+>
+<f:view>
+    <h:head>
+        <title>Students</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <h:body>
+        <h1>Students</h1>
+        <h:form>
+            <h:panelGrid columns="2" styleClass="inputform">
+                <h:outputLabel value="Name:" for="name"/>
+                <h:inputText id="name" value="#{studentService.student.name}"/>
+                <h:outputLabel value="Age:" for="age"/>
+                <p:spinner id="age" value="#{studentService.student.age}"/>
+                <h:outputLabel value="Speciality:" for="speciality"/>
+                <p:selectOneMenu id="speciality" value="#{studentService.selectedSpecialityId}">
+                    <f:selectItem itemLabel="-----------" itemValue="#{null}"/>
+                    <f:selectItems value="#{specialityService.specialities}"
+                                   var="sp"
+                                   itemLabel="#{sp.title}"
+                                   itemValue="#{sp.id}"/>
+                </p:selectOneMenu>
+            </h:panelGrid>
+            <p:commandButton styleClass="ui-button-raised" action="#{studentService.addStudent()}" value="Add" update="@form, table"/>
+        </h:form>
+        <h2>Students</h2>
+        <h:form id="table">
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes ui-button-danger"/>
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>
+            </p:confirmDialog>
+        <h:dataTable value="#{studentService.students}" var="s">
+            <h:column>
+                <f:facet name="header">№</f:facet>
+                <h:outputText value="#{s.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{s.name}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Age</f:facet>
+                <h:outputText value="#{s.age}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Speciality</f:facet>
+                <h:outputText value="#{s.specialty != null ? s.specialty.title : '---'}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">X</f:facet>
+                <p:commandButton icon="pi pi-trash"
+                                 styleClass="rounded-button ui-button-danger"
+                                 action="#{studentService.delete(s.id)}" update="@form">
+                    <p:confirm header="Delete Student" icon="pi pi-exclamation-triangle"
+                               message="Are you sure you want to delete student?"/>
+                </p:commandButton>
+            </h:column>
+        </h:dataTable>
+        </h:form>
+    </h:body>
+</f:view>
+</html>
